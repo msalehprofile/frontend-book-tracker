@@ -22,6 +22,9 @@ function App() {
   );
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [readBooks, setReadBooks] = useState<ReadBooks[]>([]);
+  const [wantToReadCount, setWantToReadCount] = useState<Number>();
+  const [pagesRead, setPagesRead] = useState<Number>();
+  const [numberOfBooksRead, setNumberOfBooksRead] = useState<Number>();
 
   const getBooks = async () => {
     const response = await fetch("http://localhost:8080/allbooks");
@@ -42,9 +45,27 @@ function App() {
   };
 
   const getReadBooks = async () => {
-    const response = await fetch("http://localhost:8080/read");
+    const response = await fetch("http://localhost:8080/finishedreading");
     const booksReadData = await response.json();
     setReadBooks(booksReadData);
+  };
+
+  const getAmountOfBooksRead = async () => {
+    const response = await fetch("http://localhost:8080/countreadbooks");
+    const booksReadData = await response.json();
+    setNumberOfBooksRead(booksReadData);
+  };
+
+  // const getAmountOfPagesRead = async () => {
+  //   const response = await fetch("http://localhost:8080/countreadpages");
+  //   const pagesReadData = await response.json();
+  //   setPagesRead(pagesReadData);
+  // };
+
+  const getAmountOfBooksInTBR = async () => {
+    const response = await fetch("http://localhost:8080/countTBR");
+    const booksReadData = await response.json();
+    setWantToReadCount(booksReadData);
   };
 
   const handleSearchInput = (event: FormEvent<HTMLInputElement>) => {
@@ -52,13 +73,14 @@ function App() {
     setSearchTerm(cleanedInput);
   };
 
- 
-
   useEffect(() => {
     getBooks();
     getCurrentlyReading();
     getWantToRead();
     getReadBooks();
+    getAmountOfBooksRead();
+    getAmountOfBooksInTBR();
+    // getAmountOfPagesRead();
   }, []);
 
   return (
@@ -67,7 +89,14 @@ function App() {
       <Routes>
         <Route
           path="/myBooks"
-          element={<ViewMyBooks currentlyReading={currentlyReading} />}
+          element={
+            <ViewMyBooks
+              currentlyReading={currentlyReading}
+              numberOfBooksRead={numberOfBooksRead}
+              wantToReadCount={wantToReadCount}
+              pagesRead={pagesRead}
+            />
+          }
         />
         <Route
           path="/browseBooks"
@@ -85,7 +114,7 @@ function App() {
           element={<WantToRead wantToRead={wantToRead} />}
         />
         <Route
-          path="/finishedreading"
+          path="/finishedbooks"
           element={<FinishedReading readBooks={readBooks} />}
         />
       </Routes>

@@ -1,0 +1,16 @@
+.mybooks__currentlyreading-title {
+    padding: 15px 10px;
+
+}
+
+.mybooks__tiles {
+    display: flex;
+    flex-direction: column;  
+
+    &--link {
+        padding: 40px 30px;
+        margin: 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+    }
+}

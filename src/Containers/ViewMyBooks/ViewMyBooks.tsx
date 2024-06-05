@@ -5,13 +5,16 @@ import { Link } from "react-router-dom";
 
 type ViewMyBooksProps = {
   currentlyReading: CurrentlyReading[];
+  numberOfBooksRead: Number | undefined;
+  wantToReadCount: Number | undefined;
+  pagesRead: Number | undefined;
 };
 
-const ViewMyBooks = ({ currentlyReading }: ViewMyBooksProps) => {
+const ViewMyBooks = ({ currentlyReading, numberOfBooksRead, wantToReadCount, pagesRead }: ViewMyBooksProps) => {
 
     return (
-    <div>
-        <h2 className="currentlyreading-title">Currently Reading</h2>
+    <div className="mybooks">
+        <h2 className="mybooks__currentlyreading-title">Currently Reading</h2>
         {currentlyReading.map((book) => (
         <CurrentlyReadingCard key={book.id}
         title={book.title}
@@ -20,15 +23,12 @@ const ViewMyBooks = ({ currentlyReading }: ViewMyBooksProps) => {
         numberOfPages={book.numberOfPages} />
         ))}
 
-        <div>
-            <Link to="/bookStats"> <p>My All Time Reading Book Stats</p> </Link>
-        </div>
-        <div>
-            <Link to="/wanttoread"> <p>Want to Read</p> </Link>
-        </div>
+        <div className="mybooks__tiles">
+            <Link to="/bookStats"> <p className="mybooks__tiles--link" >My All Time Reading Book Stats</p> </Link>
 
-        <div>
-            <Link to="/read"> <p>Finished reading</p> </Link>
+            <Link to="/wanttoread"> <p className="mybooks__tiles--link">Want to Read: {`${wantToReadCount}`} books</p> </Link>
+
+            <Link to="/finishedbooks"> <p className="mybooks__tiles--link">Finished reading: {`${numberOfBooksRead}`} books</p> </Link>
         </div>
     </div>
     );

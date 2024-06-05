@@ -11,7 +11,7 @@ type FinishedReadingProps = {
 const FinishedReading = ({readBooks}: FinishedReadingProps) => {
   return (
     <div>
-    {readBooks.map((book) => <FinishedReadingBookCard title={book.title} author={book.author} dateFinished={book.dateFinished} dateStarted={book.dateStarted} imageURL={book.imageURL} numberOfPages={book.numberOfPages} rating={book.rating}/>)}
+    {readBooks.map((book) => <FinishedReadingBookCard key={book.id} title={book.title} author={book.author} dateFinished={book.dateFinished} dateStarted={book.dateStarted} imageURL={book.imageURL} numberOfPages={book.numberOfPages} rating={book.rating}/>)}
     </div>
   )
 }

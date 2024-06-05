@@ -2,13 +2,16 @@ import './WantToReadBookCard.scss'
 import Button from '../Button/Button';
 
 type WantToReadBookCardProps = {
+    id: number;
     title: string;
     author: string;
     imageURL: string | undefined;
     dateAdded: string;
+    handleSelect?: (bookId: number) => void;
+    handleDelete?: (bookId: number) => void;
 }
 
-const WantToReadBookCard = ({ title, author, imageURL, dateAdded }: WantToReadBookCardProps) => {
+const WantToReadBookCard = ({ title, author, imageURL, id, dateAdded, handleSelect }: WantToReadBookCardProps) => {
     
   return (
     <div>
@@ -18,7 +21,8 @@ const WantToReadBookCard = ({ title, author, imageURL, dateAdded }: WantToReadBo
         <p className="wtr-bookCard__details--book">{title}</p>
         <p className="wtr-bookCard__details--book">{author}</p>
         <p className="wtr-bookCard__details--book">{dateAdded}</p>
-        <Button label="Currently Reading" />
+        <button onClick={handleSelect ? () => handleSelect(id) : undefined}>Add to Currently Reading </button>
+        {/* <button onClick={handleDelete ? () => handleDelete(id) : undefined}>Remove from TBR </button> */}
       </div>
     </div>
     </div>
