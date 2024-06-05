@@ -1,9 +1,8 @@
 import "./BookCard.scss";
-import { Books } from "../../Data/booktypes";
+
 import Button from "../Button/Button";
 
 export type BookData = {
-  books: Books[];
   title: string;
   author: string;
   imageURL: string;

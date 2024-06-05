@@ -1,31 +1,26 @@
-import { Books } from "./Data/booktypes";
 import "./App.scss";
 import NavBar from "./Components/NavBar/NavBar";
 import { useEffect, useState } from "react";
-import BookCard from "./Components/BookCard/BookCard";
-import books from "./Data/storedBooks";
+import { Books } from "./Data/booktypes";
+
 import MainCopy from "./Containers/MainCopy/MainCopy";
 
 function App() {
-  // const getBooks = async () => {
-  //   const url = "http://localhost:8080/allbooks";
-  //   const response = await fetch(url);
-
-  //   if (!response.ok) {
-  //     console.log(`Unsuccessful fetch, error code was: ${response.status}`);
-  //     return;
-  //   }
-
-  //   const data: Books[] = await response.json();
-
-  //   setBooks(data);
-  // };
-
-  // useEffect(() => {
-  //   getBooks();
-  // }, []);
+  const [allBooks, setAllBooks] = useState<Books[]>([])
   const [showAllBooks, setShowAllBooks] = useState<boolean>(false);
   const [showMyBooks, setShowMyBooks] = useState<boolean>(true);
+
+  const getBooks = async () => {
+    const response = await fetch("http://localhost:8080/allbooks");
+    const booksData = await response.json()
+    setAllBooks(booksData)
+  }
+
+  useEffect(() => {
+    getBooks()
+  },[])
+
+
 
   return (
     <>
@@ -34,7 +29,7 @@ function App() {
           setShowAllBooks={setShowAllBooks}
           setShowMyBooks={setShowMyBooks}
         />
-        <MainCopy showAllBooks={showAllBooks} />
+        <MainCopy showAllBooks={showAllBooks} allBooks={allBooks} />
       </div>
     </>
   );
