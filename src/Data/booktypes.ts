@@ -3,7 +3,7 @@ export type Books = {
     title: string;
     author: string;
     genre: string;
-    imageURL?: string;
+    imageURL: string;
 }
 
 export type WantToReadBooks = {
