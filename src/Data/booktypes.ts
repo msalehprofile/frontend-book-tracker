@@ -3,7 +3,8 @@ export type Books = {
     title: string;
     author: string;
     genre: string;
-    imageURL: string;
+    imageURL?: string | undefined;
+    numberOfPages: number;
 }
 
 export type WantToReadBooks = {
@@ -21,6 +22,7 @@ export type CurrentlyReading = {
     author: string;
     genre: string;
     imageURL: string;
+    numberOfPages: number;
     dateAdded: string;
     dateStarted: string;
 }
@@ -31,6 +33,7 @@ export type ReadBooks = {
     author: string;
     genre: string;
     imageURL: string;
+    numberOfPages: number;
     dateAdded: string;
     dateStarted: string;
     dateFinished: string;

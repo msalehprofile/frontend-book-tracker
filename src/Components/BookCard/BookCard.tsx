@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 export type BookData = {
   title: string;
   author: string;
-  imageURL: string;
+  imageURL: string | undefined;
 };
 
 const BookCard = ({ title, author, imageURL }: BookData) => {
