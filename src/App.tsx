@@ -1,12 +1,12 @@
 import { Books } from "./Data/booktypes";
 import "./App.scss";
-import NavBar from "./NavBar/NavBar";
+import NavBar from "./Components/NavBar/NavBar";
 import { useEffect, useState } from "react";
-import BookCard from "./BookCard/BookCard";
+import BookCard from "./Components/BookCard/BookCard";
 import books from "./Data/storedBooks";
+import MainCopy from "./Containers/MainCopy/MainCopy";
 
 function App() {
-
   // const getBooks = async () => {
   //   const url = "http://localhost:8080/allbooks";
   //   const response = await fetch(url);
@@ -24,20 +24,17 @@ function App() {
   // useEffect(() => {
   //   getBooks();
   // }, []);
-
+  const [showAllBooks, setShowAllBooks] = useState<boolean>(false);
+  const [showMyBooks, setShowMyBooks] = useState<boolean>(true);
 
   return (
     <>
       <div>
-        <NavBar />
-        {books.map((book) => (
-          <BookCard key={book.id}
-            books={books}
-            title={book.title}
-            author={book.author}
-            genre={book.genre}
-          />
-        ))}
+        <NavBar
+          setShowAllBooks={setShowAllBooks}
+          setShowMyBooks={setShowMyBooks}
+        />
+        <MainCopy showAllBooks={showAllBooks} />
       </div>
     </>
   );
