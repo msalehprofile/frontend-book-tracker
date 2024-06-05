@@ -1,8 +1,13 @@
 import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./Components/NavBar/NavBar";
-import { useEffect, useState } from "react";
-import { Books, CurrentlyReading, WantToReadBooks, ReadBooks } from "./Data/booktypes";
+import { useEffect, useState, FormEvent } from "react";
+import {
+  Books,
+  CurrentlyReading,
+  WantToReadBooks,
+  ReadBooks,
+} from "./Data/booktypes";
 import ViewAllBooks from "./Containers/ViewAllBooks/ViewAllBooks";
 import ViewMyBooks from "./Containers/ViewMyBooks/ViewMyBooks";
 import AddABook from "./Containers/AddABook/AddABook";
@@ -15,6 +20,7 @@ function App() {
   const [currentlyReading, setCurrentlyReading] = useState<CurrentlyReading[]>(
     []
   );
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [readBooks, setReadBooks] = useState<ReadBooks[]>([]);
 
   const getBooks = async () => {
@@ -35,11 +41,18 @@ function App() {
     setWantToRead(wantToReadData);
   };
 
-  const getReadBooks = async() => {
+  const getReadBooks = async () => {
     const response = await fetch("http://localhost:8080/read");
-    const booksReadData = await response.json()
-    setReadBooks(booksReadData)
-  }
+    const booksReadData = await response.json();
+    setReadBooks(booksReadData);
+  };
+
+  const handleSearchInput = (event: FormEvent<HTMLInputElement>) => {
+    const cleanedInput = event.currentTarget.value.toLowerCase();
+    setSearchTerm(cleanedInput);
+  };
+
+ 
 
   useEffect(() => {
     getBooks();
@@ -58,11 +71,23 @@ function App() {
         />
         <Route
           path="/browseBooks"
-          element={<ViewAllBooks allBooks={allBooks} />}
+          element={
+            <ViewAllBooks
+              allBooks={allBooks}
+              searchTerm={searchTerm}
+              handleSearchTerm={handleSearchInput}
+            />
+          }
         />
         <Route path="/addBooks" element={<AddABook />} />
-        <Route path="/wanttoread" element={<WantToRead wantToRead={wantToRead}/>} />
-        <Route path="/finishedreading" element={<FinishedReading readBooks={readBooks}/>} />
+        <Route
+          path="/wanttoread"
+          element={<WantToRead wantToRead={wantToRead} />}
+        />
+        <Route
+          path="/finishedreading"
+          element={<FinishedReading readBooks={readBooks} />}
+        />
       </Routes>
     </Router>
   );
