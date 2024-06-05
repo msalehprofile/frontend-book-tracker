@@ -1,37 +1,70 @@
 import "./App.scss";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./Components/NavBar/NavBar";
 import { useEffect, useState } from "react";
-import { Books } from "./Data/booktypes";
-
-import MainCopy from "./Containers/MainCopy/MainCopy";
+import { Books, CurrentlyReading, WantToReadBooks, ReadBooks } from "./Data/booktypes";
+import ViewAllBooks from "./Containers/ViewAllBooks/ViewAllBooks";
+import ViewMyBooks from "./Containers/ViewMyBooks/ViewMyBooks";
+import AddABook from "./Containers/AddABook/AddABook";
+import WantToRead from "./Containers/WantToRead/WantToRead";
+import FinishedReading from "./Containers/FinishedReading/FinishedReading";
 
 function App() {
-  const [allBooks, setAllBooks] = useState<Books[]>([])
-  const [showAllBooks, setShowAllBooks] = useState<boolean>(false);
-  const [showMyBooks, setShowMyBooks] = useState<boolean>(true);
+  const [allBooks, setAllBooks] = useState<Books[]>([]);
+  const [wantToRead, setWantToRead] = useState<WantToReadBooks[]>([]);
+  const [currentlyReading, setCurrentlyReading] = useState<CurrentlyReading[]>(
+    []
+  );
+  const [readBooks, setReadBooks] = useState<ReadBooks[]>([]);
 
   const getBooks = async () => {
     const response = await fetch("http://localhost:8080/allbooks");
-    const booksData = await response.json()
-    setAllBooks(booksData)
+    const booksData = await response.json();
+    setAllBooks(booksData);
+  };
+
+  const getCurrentlyReading = async () => {
+    const response = await fetch("http://localhost:8080/currentlyreading");
+    const currentlyReadingData = await response.json();
+    setCurrentlyReading(currentlyReadingData);
+  };
+
+  const getWantToRead = async () => {
+    const response = await fetch("http://localhost:8080/wanttoread");
+    const wantToReadData = await response.json();
+    setWantToRead(wantToReadData);
+  };
+
+  const getReadBooks = async() => {
+    const response = await fetch("http://localhost:8080/read");
+    const booksReadData = await response.json()
+    setReadBooks(booksReadData)
   }
 
   useEffect(() => {
-    getBooks()
-  },[])
-
-
+    getBooks();
+    getCurrentlyReading();
+    getWantToRead();
+    getReadBooks();
+  }, []);
 
   return (
-    <>
-      <div>
-        <NavBar
-          setShowAllBooks={setShowAllBooks}
-          setShowMyBooks={setShowMyBooks}
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route
+          path="/myBooks"
+          element={<ViewMyBooks currentlyReading={currentlyReading} />}
         />
-        <MainCopy showAllBooks={showAllBooks} allBooks={allBooks} />
-      </div>
-    </>
+        <Route
+          path="/browseBooks"
+          element={<ViewAllBooks allBooks={allBooks} />}
+        />
+        <Route path="/addBooks" element={<AddABook />} />
+        <Route path="/wanttoread" element={<WantToRead wantToRead={wantToRead}/>} />
+        <Route path="/finishedreading" element={<FinishedReading readBooks={readBooks}/>} />
+      </Routes>
+    </Router>
   );
 }
 

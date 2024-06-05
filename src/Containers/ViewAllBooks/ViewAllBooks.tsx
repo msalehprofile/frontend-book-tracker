@@ -1,17 +1,13 @@
 // import books from "../../Data/storedBooks";
 import BookCard from "../../Components/BookCard/BookCard";
-import { useEffect, useState } from "react";
 import { Books } from "../../Data/booktypes";
 
 type ViewAllBooksProps = {
-  allBooks: Books[]
+  allBooks: Books[];
 }
 
 const ViewAllBooks = ({allBooks} : ViewAllBooksProps) => {
  
-
-
-  console.log(allBooks)
   return (
     <div>
       {allBooks.map((book) => (
