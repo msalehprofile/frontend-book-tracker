@@ -1,17 +1,19 @@
 import ViewAllBooks from "../ViewAllBooks/ViewAllBooks";
 import "./MainCopy.scss";
+import { Books } from "../../Data/booktypes";
 
 import React, { useState } from "react";
 
 type MainCopyProps = {
   showAllBooks: boolean;
+  allBooks: Books[];
 };
 
-const MainCopy = ({ showAllBooks }: MainCopyProps) => {
+const MainCopy = ({ showAllBooks, allBooks }: MainCopyProps) => {
   return (
     <>
       <div className="mainCopy">
-        {showAllBooks && <ViewAllBooks showAllBooks={showAllBooks} />}
+        {showAllBooks && <ViewAllBooks allBooks={allBooks} />}
       </div>
     </>
   );
