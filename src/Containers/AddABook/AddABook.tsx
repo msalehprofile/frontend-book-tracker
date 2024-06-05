@@ -10,8 +10,6 @@ const AddABook = () => {
       headers: { admin: "true", "Content-Type": "application/json" },
       body: JSON.stringify(book),
     });
-
-
   };
 
   const defaultFormState = {

@@ -28,8 +28,6 @@ export const AddABookForm = ({
         handleSubmit(book);
         navigate("/myBooks");
     }
-
-    
 };
 
     const handleInput = (event: FormEvent<HTMLInputElement>, key: string) =>
