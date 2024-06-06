@@ -6,7 +6,6 @@ import {
   useState,
   FormEventHandler,
   useEffect,
-  MouseEventHandler,
 } from "react";
 
 type ViewAllBooksProps = {
@@ -25,6 +24,8 @@ const ViewAllBooks = ({
   const handleSelect = (bookId: number) => {
     setSelectedBookId(bookId);
   };
+
+  console.log(selectedBookId)
 
   const getBookById = async () => {
       const response = await fetch(`http://localhost:8080/books/${selectedBookId}`);

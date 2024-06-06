@@ -7,7 +7,7 @@ type FinishedReadingBookCardProps = {
     numberOfPages: number;
     rating: number
     dateStarted: string;
-    dateFinished: string;
+    dateFinished: Date;
 }
 
 const FinishedReadingBookCard = ({}:FinishedReadingBookCardProps) => {
