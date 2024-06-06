@@ -17,10 +17,8 @@ import ReviewBooksPage from "./Containers/ReviewBooksPage/ReviewBooksPage";
 
 function App() {
   const [allBooks, setAllBooks] = useState<Books[]>([]);
-  const [wantToRead, setWantToRead] = useState<WantToReadBooks[]>([]);
-  const [currentlyReading, setCurrentlyReading] = useState<CurrentlyReading[]>(
-    []
-  );
+
+  
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [readBooks, setReadBooks] = useState<ReadBooks[]>([]);
   const [wantToReadCount, setWantToReadCount] = useState<Number>();
@@ -32,18 +30,6 @@ function App() {
     const response = await fetch("http://localhost:8080/allbooks");
     const booksData = await response.json();
     setAllBooks(booksData);
-  };
-
-  const getCurrentlyReading = async () => {
-    const response = await fetch("http://localhost:8080/currentlyreading");
-    const currentlyReadingData = await response.json();
-    setCurrentlyReading(currentlyReadingData);
-  };
-
-  const getWantToRead = async () => {
-    const response = await fetch("http://localhost:8080/wanttoread");
-    const wantToReadData = await response.json();
-    setWantToRead(wantToReadData);
   };
 
   const getReadBooks = async () => {
@@ -95,8 +81,6 @@ function App() {
 
   useEffect(() => {
     getBooks();
-    getCurrentlyReading();
-    getWantToRead();
     getReadBooks();
     getAmountOfBooksRead();
     getAmountOfBooksInTBR();
@@ -110,7 +94,6 @@ function App() {
           path="/myBooks"
           element={
             <ViewMyBooks
-              currentlyReading={currentlyReading}
               numberOfBooksRead={numberOfBooksRead}
               wantToReadCount={wantToReadCount}
               pagesRead={pagesRead}
@@ -131,7 +114,7 @@ function App() {
         <Route path="/addBooks" element={<AddABook />} />
         <Route
           path="/wanttoread"
-          element={<WantToRead wantToRead={wantToRead} />}
+          element={<WantToRead />}
         />
         <Route
           path="/finishedbooks"

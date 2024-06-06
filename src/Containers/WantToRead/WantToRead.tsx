@@ -3,24 +3,22 @@ import { CurrentlyReading, WantToReadBooks } from "../../Data/booktypes";
 import "./WantToRead.scss";
 import { useState, useEffect } from "react";
 
-type WantToReadProps = {
-  wantToRead: WantToReadBooks[];
-};
-
-const WantToRead = ({ wantToRead}: WantToReadProps) => {
+const WantToRead = () => {
   const [selectedBookId, setSelectedBookId] = useState<number>();
   const [selectedBook, setSelectedBook] = useState<WantToReadBooks | null>(null);
   const [addBookToCR, setAddBookToCR] = useState<Boolean>(false)
+  const [wantToRead, setWantToRead] = useState<WantToReadBooks[]>([]);
+
+  const getWantToRead = async () => {
+    const response = await fetch("http://localhost:8080/wanttoread");
+    const wantToReadData = await response.json();
+    setWantToRead(wantToReadData);
+  };
 
   const handleSelect = (bookId: number) => {
     setSelectedBookId(bookId);
     setAddBookToCR(true)
   };
-
-  // const handleDelete = (bookId: number) => {
-  //   setSelectedBookId(bookId);
-    
-  // };
 
   const getBookById = async () => {
     const response = await fetch(`http://localhost:8080/TBRbooks/${selectedBookId}`);
@@ -42,6 +40,7 @@ useEffect(() => {
   if (selectedBookId !== null && selectedBookId !== undefined) {
     getBookById();
   }
+  getWantToRead()
 }, [selectedBookId]);
 
 console.log(selectedBook)

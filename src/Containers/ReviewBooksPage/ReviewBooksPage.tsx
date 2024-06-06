@@ -1,5 +1,4 @@
-import ReviewForm from "../../Components/ReviewForm/ReviewForm";
-import { ReadBooks, CurrentlyReading } from "../../Data/booktypes";
+import { ReadBooks } from "../../Data/booktypes";
 import { useState, useEffect, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ReviewBooksPage.scss";
@@ -71,10 +70,7 @@ const ReviewBooksPage = ({
     headers: {
         "Content-Type": "application/json",
       },
-   }
-
-   )
-   
+   })
   };
 
   useEffect(() => {
