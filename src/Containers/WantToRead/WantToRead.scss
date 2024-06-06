@@ -1,0 +1,8 @@
+@use '/src/Variables/Variables.scss' as *;
+
+.tbr {
+    &__title {
+        padding: 15px;
+        font-weight: $bold-font-weight;
+        }
+}

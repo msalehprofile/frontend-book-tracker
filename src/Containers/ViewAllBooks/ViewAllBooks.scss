@@ -1,0 +1,8 @@
+@use '/src/Variables/Variables.scss' as *;
+
+.allstoredbooks {
+  .allstoredbooks__title {
+    padding: 15px 10px;
+    font-weight: $bold-font-weight;
+  }
+}

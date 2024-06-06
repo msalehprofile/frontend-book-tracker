@@ -1,4 +1,4 @@
-
+import './SearchBar.scss'
 import { FormEventHandler } from 'react'
 
 type SearchBarProps = {
@@ -12,7 +12,7 @@ const SearchBar = ({searchTerm, handleSearchTerm}: SearchBarProps) => {
         <input type="text"
             onInput={handleSearchTerm}
             value={searchTerm} 
-             placeholder="Seach by name" className="search__searchbox"/></div>
+            placeholder="Seach by name" className="search__searchbox"/></div>
   )
 }
 

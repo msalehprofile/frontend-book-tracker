@@ -13,9 +13,9 @@ const BookCard = ({ title, author, imageURL, id, handleSelect }: BookData) => {
     <div className="bookCard">
       <img className="bookCard__image" src={imageURL} alt="" />
       <div className="bookCard__details">
-        <p className="bookCard__details--book">{title}</p>
+        <p className="bookCard__details--title">{title}</p>
         <p className="bookCard__details--book">{author}</p>
-        <button onClick={handleSelect ? () => handleSelect(id) : undefined} >Want to Read </button>
+        <button className="bookCard__details--button" onClick={handleSelect ? () => handleSelect(id) : undefined} >Want to Read </button>
       </div>
     </div>
   );

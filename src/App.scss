@@ -1,6 +1,11 @@
+@use '/src/Variables/Variables.scss' as *;
+
 * {
     padding: 0;
     margin: 0;
-    background-color: wheat;
+    background-color: $main-background-colour;
     text-decoration: none;
+    color: $main-font-colour;
+    font-family: $main-font;
+    font-weight: $main-font-weight;
 }

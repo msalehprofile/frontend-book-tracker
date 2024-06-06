@@ -1,4 +1,4 @@
-// import books from "../../Data/storedBooks";
+import './ViewAllBooks.scss'
 import BookCard from "../../Components/BookCard/BookCard";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import { Books, WantToReadBooks } from "../../Data/booktypes";
@@ -48,8 +48,12 @@ const ViewAllBooks = ({
     }, [selectedBookId]);
 
   return (
-    <div>
+    <div className="allstoredbooks">
+
+      <h2 className="allstoredbooks__title">Browse all books</h2>
+      
       <SearchBar handleSearchTerm={handleSearchTerm} searchTerm={searchTerm} />
+      
       {allBooks
         .filter((books) => books.title.toLowerCase().includes(searchTerm))
         .map((book) => (

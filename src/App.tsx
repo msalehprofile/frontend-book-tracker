@@ -85,7 +85,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route
-          path="/myBooks"
+          path="/"
           element={<ViewMyBooks handleSelect={handleSelect} />}
         />
         <Route

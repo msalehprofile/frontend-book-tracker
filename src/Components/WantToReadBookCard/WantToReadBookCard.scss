@@ -1,15 +1,19 @@
+@use '/src/Variables/Variables.scss' as *;
+
 .wtr-bookCard {
-  background-color: green;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
-  margin: 5px;
-  width: 95%;
-  height: 120px;
+  margin: 10px 10px;
+  width: 92%;
+  height: 130px;
   padding: 5px;
   justify-content: center;
   align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
   gap: 5px;
+  border: 1px solid black;
 
   &__image {
     height: 100px;
@@ -20,9 +24,29 @@
     grid-row: 1;
     grid-column: 2/4;
     padding: 5px;
+    line-height: 20px;
 
     &--book {
       margin: 7px 0px;
+    }
+
+    &--title {
+      margin: 7px 0px;
+      font-weight: $bold-font-weight;
+    }
+
+    &--button {
+      margin-top: 5px;
+      border-radius: 10px;
+      width: 200px;
+      background-color: $main-colour;
+      border: 1px solid $main-colour;
+      font-weight: $bold-font-weight;
+
+      &:active {
+        background-color: darken($main-colour, 10%);
+      }
+
     }
   }
 }
