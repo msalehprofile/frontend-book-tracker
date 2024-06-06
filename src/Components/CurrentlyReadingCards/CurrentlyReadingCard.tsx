@@ -1,15 +1,17 @@
 import './CurrentlyReadingCard.scss';
-import Button from '../Button/Button';
-import React from 'react'
+
+import { Link } from 'react-router-dom';
 
 type CurrentlyReadingCardProps = {
     title: string;
     author: string;
     imageURL: string | undefined;
     numberOfPages: number;
+    id: number;
+    handleSelect?: (bookId: number) => void;
 }
 
-const CurrentlyReadingCard = ({ title, author, imageURL, numberOfPages }: CurrentlyReadingCardProps) => {
+const CurrentlyReadingCard = ({ title, author, imageURL, numberOfPages, id, handleSelect }: CurrentlyReadingCardProps) => {
   
     return (
     <div className="currentlyReadingCard">
@@ -18,7 +20,7 @@ const CurrentlyReadingCard = ({ title, author, imageURL, numberOfPages }: Curren
         <p className="currentlyReadingCard__details--book">{title}</p>
         <p className="currentlyReadingCard__details--book">{author}</p>
         <p className="currentlyReadingCard__details--book">Pages: {numberOfPages}</p>
-        <Button label="Finished" />
+        <Link to="/myBooks/reviewbook"><button onClick={handleSelect ? () => handleSelect(id) : undefined}>Finished</button></Link>
       </div>
     </div>
   )

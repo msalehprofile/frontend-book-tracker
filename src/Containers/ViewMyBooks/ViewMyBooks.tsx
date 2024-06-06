@@ -8,19 +8,25 @@ type ViewMyBooksProps = {
   numberOfBooksRead: Number | undefined;
   wantToReadCount: Number | undefined;
   pagesRead: Number | undefined;
+  handleSelect: (bookId: number) => void;
 };
 
-const ViewMyBooks = ({ currentlyReading, numberOfBooksRead, wantToReadCount, pagesRead }: ViewMyBooksProps) => {
+const ViewMyBooks = ({ currentlyReading, numberOfBooksRead, wantToReadCount, pagesRead, handleSelect }: ViewMyBooksProps) => {
+    
+    
+
 
     return (
     <div className="mybooks">
         <h2 className="mybooks__currentlyreading-title">Currently Reading</h2>
         {currentlyReading.map((book) => (
         <CurrentlyReadingCard key={book.id}
+        id={book.id}
         title={book.title}
         author={book.author}
         imageURL={book.imageURL}
-        numberOfPages={book.numberOfPages} />
+        numberOfPages={book.numberOfPages}
+        handleSelect={handleSelect} />
         ))}
 
         <div className="mybooks__tiles">

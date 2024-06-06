@@ -13,6 +13,7 @@ import ViewMyBooks from "./Containers/ViewMyBooks/ViewMyBooks";
 import AddABook from "./Containers/AddABook/AddABook";
 import WantToRead from "./Containers/WantToRead/WantToRead";
 import FinishedReading from "./Containers/FinishedReading/FinishedReading";
+import ReviewBooksPage from "./Containers/ReviewBooksPage/ReviewBooksPage";
 
 function App() {
   const [allBooks, setAllBooks] = useState<Books[]>([]);
@@ -25,6 +26,7 @@ function App() {
   const [wantToReadCount, setWantToReadCount] = useState<Number>();
   const [pagesRead, setPagesRead] = useState<Number>();
   const [numberOfBooksRead, setNumberOfBooksRead] = useState<Number>();
+  const [selectedBookId, setSelectedBookId] = useState<number>();
 
   const getBooks = async () => {
     const response = await fetch("http://localhost:8080/allbooks");
@@ -56,6 +58,10 @@ function App() {
     setNumberOfBooksRead(booksReadData);
   };
 
+  const handleSelect = (bookId: number) => {
+    setSelectedBookId(bookId);
+  };
+
   // const getAmountOfPagesRead = async () => {
   //   const response = await fetch("http://localhost:8080/countreadpages");
   //   const pagesReadData = await response.json();
@@ -73,6 +79,20 @@ function App() {
     setSearchTerm(cleanedInput);
   };
 
+    const defaultFormState = {
+    id: -1,
+    title: "",
+    author: "",
+    genre: "",
+    numberOfPages: 0,
+    imageURL: "",
+    dateAdded:"",
+    dateStarted: "",
+    dateFinished: new Date(),
+    rating: 0,
+    review: "",
+  };
+
   useEffect(() => {
     getBooks();
     getCurrentlyReading();
@@ -80,8 +100,7 @@ function App() {
     getReadBooks();
     getAmountOfBooksRead();
     getAmountOfBooksInTBR();
-    // getAmountOfPagesRead();
-  }, []);
+  }, [wantToReadCount]);
 
   return (
     <Router>
@@ -95,6 +114,7 @@ function App() {
               numberOfBooksRead={numberOfBooksRead}
               wantToReadCount={wantToReadCount}
               pagesRead={pagesRead}
+              handleSelect={handleSelect}
             />
           }
         />
@@ -116,6 +136,10 @@ function App() {
         <Route
           path="/finishedbooks"
           element={<FinishedReading readBooks={readBooks} />}
+        />
+        <Route
+          path="/myBooks/reviewbook"
+          element={<ReviewBooksPage defaultFormState={defaultFormState} selectedBookId={selectedBookId}/>}
         />
       </Routes>
     </Router>

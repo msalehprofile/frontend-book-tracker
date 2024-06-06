@@ -36,7 +36,7 @@ export type ReadBooks = {
     numberOfPages: number;
     dateAdded: string;
     dateStarted: string;
-    dateFinished: string;
+    dateFinished: Date;
     rating: number;
-    review?: string;
+    review: string;
 }
