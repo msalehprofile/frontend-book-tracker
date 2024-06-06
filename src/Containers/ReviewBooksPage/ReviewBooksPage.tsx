@@ -51,7 +51,7 @@ const ReviewBooksPage = ({
 
   const handleSubmit = () => {
     setBookToReview(defaultReviewFormState);
-    handleSubmitRating(bookToReview);
+    handleSubmitRating(defaultReviewFormState);
   };
 
   const handleSubmitRating = async (book: ReadBooks) => {
@@ -61,44 +61,50 @@ const ReviewBooksPage = ({
       body: JSON.stringify(book),
     });
     handleDeletingFromCurrentlyReading();
-    navigate("/myBooks")
+    navigate("/");
   };
 
-  
   const handleDeletingFromCurrentlyReading = async () => {
-   await fetch(`http://localhost:8080/currentreads/delete/${selectedBookId}`, {
-    method: "DELETE",
-    headers: {
+    await fetch(`http://localhost:8080/currentreads/delete/${selectedBookId}`, {
+      method: "DELETE",
+      headers: {
         "Content-Type": "application/json",
       },
-   })
+    });
   };
-
-
 
   useEffect(() => {
     if (selectedBookId !== null && selectedBookId !== undefined) {
       handleGetBookById();
     }
     if (review !== undefined && selectedBookId !== undefined) {
-
     }
   }, [selectedBookId]);
 
   return (
-    <div>
-      <h2>Review {bookToReview.title}</h2>
-      <p>Enter your rating here:</p>
-      <input
-        type="text"
-        placeholder="Rating"
-        value={rating}
-        onInput={handleRatingInput}
-      />
-      <p>/5</p>
-      <p>Enter your review here:</p>
-      <input type="text" placeholder="Review" onInput={handleReviewInput} />
-      <button onClick={handleSubmit}>Submit</button>
+    <div className="reviewpage">
+      <h2 className="reviewpage__title">Review '{bookToReview.title}' by {bookToReview.author}</h2>
+      <div className="reviewpage__table">
+        <p className="reviewpage__table--heading">Enter your rating here:</p>
+        <div className="reviewpage__table--rating">
+          <input
+            className="table__rating--input"
+            type="text"
+            placeholder="Rating"
+            value={rating}
+            onInput={handleRatingInput}
+          />
+          <p>/5</p>
+        </div>
+        <p className="reviewpage__table--heading">Enter your review here:</p>
+        <input
+          className="reviewpage__table--input"
+          type="text"
+          placeholder="Review"
+          onInput={handleReviewInput}
+        />
+        <button className="reviewpage__table--button" onClick={handleSubmit}>Submit</button>
+      </div>
     </div>
   );
 };

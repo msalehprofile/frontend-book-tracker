@@ -26,7 +26,7 @@ export const AddABookForm = ({
     } else {
         alert("Thank you for adding a book")
         handleSubmit(book);
-        navigate("/myBooks");
+        navigate("/");
     }
 };
 
@@ -35,33 +35,41 @@ export const AddABookForm = ({
 
     return (
     <div className="addingBookForm">
-        <h2>{formTitle}</h2>
-        <form onSubmit={handleValidation}>
+        <h2 className="addingBookForm__title">{formTitle}</h2>
+        <form onSubmit={handleValidation} className="addingBookForm__table">
+            <p className="addingBookForm__table--heading">Title:</p>
         <input
+            className="addingBookForm__table--inputs"
             type="text"
             placeholder="Title"
             value={book.title}
             onInput={(event) => handleInput(event, "title")}
         />
+        <p className="addingBookForm__table--heading"> Author:</p>
         <input
+            className="addingBookForm__table--inputs"
             type="text"
             placeholder="Author"
             value={book.author}
             onInput={(event) => handleInput(event, "author")}
         />
+        <p className="addingBookForm__table--heading">Genre:</p>
         <input
+            className="addingBookForm__table--inputs"
             type="text"
             placeholder="Genre"
             value={book.genre}
             onInput={(event) => handleInput(event, "genre")}
         />
+        <p className="addingBookForm__table--heading">Number of Pages:</p>
         <input
+            className="addingBookForm__table--inputs"
             type="text"
             placeholder="Number of Pages"
             value={book.numberOfPages}
             onInput={(event) => handleInput(event, "numberOfPages")}
         />
-        <button type="submit" className="addingBookForm-button">
+        <button type="submit" className="addingBookForm--button">
           Submit
         </button>
       </form>

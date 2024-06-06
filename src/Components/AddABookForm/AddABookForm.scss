@@ -1,0 +1,48 @@
+@use '/src/Variables/Variables.scss' as *;
+
+.addingBookForm {
+    
+    &__title {
+        padding: 15px 10px;
+        font-weight: $bold-font-weight;
+        }
+
+
+    &__table {
+        margin: 15px 10px;
+        padding: 15px 10px;
+        font-weight: $bold-font-weight;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &--heading {
+            font-weight: $bold-font-weight;
+            margin: 10px 0px 3px;
+        }
+
+        &--inputs {
+            border: 2px solid $secondary-colour;
+            border-radius: 20px ;
+            padding: 4px 15px;
+            width: 200px;
+            text-align: c;
+        }
+        }
+
+      &--button {
+        margin: 25px 65px;
+        border-radius: 10px;
+        width: 115px;
+        background-color: $main-colour;
+        font-weight: $bold-font-weight;
+        border: 1px solid $main-colour;
+
+        &:active {
+          background-color: darken($main-colour, 10%);
+        }
+    }
+    
+
+}

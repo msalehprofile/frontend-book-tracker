@@ -1,0 +1,58 @@
+@use '/src/Variables/Variables.scss' as *;
+
+.reviewpage{
+    &__title {
+        padding: 15px;
+        font-weight: $bold-font-weight;
+    }
+
+    &__table {
+        margin: 15px 10px;
+        padding: 15px 10px;
+        font-weight: $bold-font-weight;
+        display: flex;
+        flex-direction: column;
+        
+        &--heading {
+            font-weight: $bold-font-weight;
+            margin: 10px 0px 3px;
+        }
+    
+        &--rating {
+            display: flex;
+        }
+
+        &--input {
+            border: 2px solid $secondary-colour;
+            border-radius: 20px;
+            padding: 10px 15px;
+            width: 90%;
+            height: 400px;
+        }
+
+        &--button {
+            margin: 25px 135px 25px;
+            border-radius: 10px;
+            width: 115px;
+            background-color: $main-colour;
+            font-weight: $bold-font-weight;
+            border: 1px solid $main-colour;
+    
+            &:active {
+                background-color: darken($main-colour, 10%);
+            }
+        }
+    }
+        
+
+       
+        }
+
+        .table__rating--input{
+            width: 30px;
+            text-align: center;
+            border: 1px solid $main-colour;
+            border-radius: 30px;
+        }
+
+     

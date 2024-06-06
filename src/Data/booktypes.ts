@@ -24,7 +24,7 @@ export type CurrentlyReading = {
     imageURL: string;
     numberOfPages: number;
     dateAdded: string;
-    dateStarted: string;
+    dateStarted: Date;
 }
 
 export type ReadBooks = {

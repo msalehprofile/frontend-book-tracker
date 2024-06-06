@@ -15,13 +15,14 @@ const WantToReadBookCard = ({ title, author, imageURL, id, dateAdded, handleSele
     
   return (
     <div>
-        <div className="wtr-BookCard">
+
+        <div className="wtr-bookCard">
         <img className="wtr-bookCard__image" src={imageURL} alt="" />
         <div className="wtr-bookCard__details">
-        <p className="wtr-bookCard__details--book">{title}</p>
+        <p className="wtr-bookCard__details--title">{title}</p>
         <p className="wtr-bookCard__details--book">{author}</p>
         <p className="wtr-bookCard__details--book">{dateAdded}</p>
-        <button onClick={handleSelect ? () => handleSelect(id) : undefined}>Add to Currently Reading </button>
+        <button className="wtr-bookCard__details--button" onClick={handleSelect ? () => handleSelect(id) : undefined}>Add to Currently Reading </button>
         {/* <button onClick={handleDelete ? () => handleDelete(id) : undefined}>Remove from TBR </button> */}
       </div>
     </div>
