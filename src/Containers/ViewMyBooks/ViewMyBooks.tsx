@@ -2,18 +2,26 @@ import "./ViewMyBooks.scss";
 import { CurrentlyReading } from "../../Data/booktypes";
 import CurrentlyReadingCard from "../../Components/CurrentlyReadingCards/CurrentlyReadingCard";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 type ViewMyBooksProps = {
-  currentlyReading: CurrentlyReading[];
-  numberOfBooksRead: Number | undefined;
-  wantToReadCount: Number | undefined;
-  pagesRead: Number | undefined;
   handleSelect: (bookId: number) => void;
 };
 
-const ViewMyBooks = ({ currentlyReading, numberOfBooksRead, wantToReadCount, pagesRead, handleSelect }: ViewMyBooksProps) => {
-    
-    
+const ViewMyBooks = ({ handleSelect }: ViewMyBooksProps) => {
+    const [currentlyReading, setCurrentlyReading] = useState<CurrentlyReading[]>(
+        []
+      );
+
+    const getCurrentlyReading = async () => {
+        const response = await fetch("http://localhost:8080/currentlyreading");
+        const currentlyReadingData = await response.json();
+        setCurrentlyReading(currentlyReadingData);
+      };
+
+      useEffect(() => {
+        getCurrentlyReading();
+      }, []);
 
 
     return (
@@ -32,9 +40,9 @@ const ViewMyBooks = ({ currentlyReading, numberOfBooksRead, wantToReadCount, pag
         <div className="mybooks__tiles">
             <Link to="/bookStats"> <p className="mybooks__tiles--link" >My All Time Reading Book Stats</p> </Link>
 
-            <Link to="/wanttoread"> <p className="mybooks__tiles--link">Want to Read: {`${wantToReadCount}`} books</p> </Link>
+            <Link to="/wanttoread"> <p className="mybooks__tiles--link">Want to Read</p> </Link>
 
-            <Link to="/finishedbooks"> <p className="mybooks__tiles--link">Finished reading: {`${numberOfBooksRead}`} books</p> </Link>
+            <Link to="/finishedbooks"> <p className="mybooks__tiles--link">Finished reading</p> </Link>
         </div>
     </div>
     );
