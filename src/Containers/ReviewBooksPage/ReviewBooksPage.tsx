@@ -64,6 +64,7 @@ const ReviewBooksPage = ({
     navigate("/myBooks")
   };
 
+  
   const handleDeletingFromCurrentlyReading = async () => {
    await fetch(`http://localhost:8080/currentreads/delete/${selectedBookId}`, {
     method: "DELETE",
@@ -72,6 +73,8 @@ const ReviewBooksPage = ({
       },
    })
   };
+
+
 
   useEffect(() => {
     if (selectedBookId !== null && selectedBookId !== undefined) {

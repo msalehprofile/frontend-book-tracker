@@ -2,12 +2,7 @@ import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./Components/NavBar/NavBar";
 import { useEffect, useState, FormEvent } from "react";
-import {
-  Books,
-  CurrentlyReading,
-  WantToReadBooks,
-  ReadBooks,
-} from "./Data/booktypes";
+import { Books, ReadBooks } from "./Data/booktypes";
 import ViewAllBooks from "./Containers/ViewAllBooks/ViewAllBooks";
 import ViewMyBooks from "./Containers/ViewMyBooks/ViewMyBooks";
 import AddABook from "./Containers/AddABook/AddABook";
@@ -18,7 +13,6 @@ import ReviewBooksPage from "./Containers/ReviewBooksPage/ReviewBooksPage";
 function App() {
   const [allBooks, setAllBooks] = useState<Books[]>([]);
 
-  
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [readBooks, setReadBooks] = useState<ReadBooks[]>([]);
   const [wantToReadCount, setWantToReadCount] = useState<Number>();
@@ -65,14 +59,14 @@ function App() {
     setSearchTerm(cleanedInput);
   };
 
-    const defaultFormState = {
+  const defaultFormState = {
     id: -1,
     title: "",
     author: "",
     genre: "",
     numberOfPages: 0,
     imageURL: "",
-    dateAdded:"",
+    dateAdded: "",
     dateStarted: "",
     dateFinished: new Date(),
     rating: 0,
@@ -92,14 +86,7 @@ function App() {
       <Routes>
         <Route
           path="/myBooks"
-          element={
-            <ViewMyBooks
-              numberOfBooksRead={numberOfBooksRead}
-              wantToReadCount={wantToReadCount}
-              pagesRead={pagesRead}
-              handleSelect={handleSelect}
-            />
-          }
+          element={<ViewMyBooks handleSelect={handleSelect} />}
         />
         <Route
           path="/browseBooks"
@@ -112,17 +99,19 @@ function App() {
           }
         />
         <Route path="/addBooks" element={<AddABook />} />
-        <Route
-          path="/wanttoread"
-          element={<WantToRead />}
-        />
+        <Route path="/wanttoread" element={<WantToRead />} />
         <Route
           path="/finishedbooks"
           element={<FinishedReading readBooks={readBooks} />}
         />
         <Route
           path="/myBooks/reviewbook"
-          element={<ReviewBooksPage defaultFormState={defaultFormState} selectedBookId={selectedBookId}/>}
+          element={
+            <ReviewBooksPage
+              defaultFormState={defaultFormState}
+              selectedBookId={selectedBookId}
+            />
+          }
         />
       </Routes>
     </Router>
